@@ -1,0 +1,13 @@
+{
+  "alloys": [
+    { "name": "Алюминиевый сплав АЛ2", "price_per_kg": 300 },
+    { "name": "Чугун СЧ20", "price_per_kg": 150 },
+    { "name": "Бронза БрОЦ4-3", "price_per_kg": 500 },
+    { "name": "Сталь 20Л", "price_per_kg": 250 },
+    { "name": "Сталь 08ГДНФЛ", "price_per_kg": 540 }
+  ],
+  "coefficients": {
+    "machining": 1.15,
+    "certificate": 1.05
+  }
+}
