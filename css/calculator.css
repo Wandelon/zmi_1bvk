@@ -1,0 +1,119 @@
+/* Стили для кнопки калькулятора в хедере */
+.calculator-button-header {
+    background-color: #007bff; /* Цвет фона */
+    color: white;              /* Цвет текста */
+    border: none;              /* Убираем рамку */
+    padding: 8px 12px;         /* Отступы внутри кнопки */
+    border-radius: 4px;        /* Закругление углов */
+    cursor: pointer;           /* Курсор в виде руки */
+    font-size: 14px;          /* Размер шрифта */
+    font-weight: bold;        /* Жирный шрифт */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+    margin-left: 10px;        /* Отступ слева от других элементов */
+    vertical-align: middle;   /* Выравнивание по вертикали */
+}
+
+/* Эффект при наведении */
+.calculator-button-header:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 2000; /* Очень высокий z-index, чтобы быть поверх всего */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Появление полосы прокрутки, если контент больше окна */
+    background-color: rgba(0,0,0,0.4); /* Полупрозрачный черный фон */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Отступ сверху/снизу и авто-выравнивание по центру */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 80%; /* Ширина модального окна */
+    max-width: 500px; /* Максимальная ширина */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Тень */
+    position: relative; /* Для позиционирования кнопки закрытия */
+}
+
+.close {
+    color: #aaa; /* Цвет крестика */
+    float: right; /* Прижать к правому краю */
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1; /* Высота строки */
+    cursor: pointer;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px;
+    right: 15px;
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Изменить цвет при наведении */
+}
+
+.calculator-title {
+    margin-top: 0; /* Убрать верхний отступ заголовка */
+    margin-bottom: 15px; /* Нижний отступ */
+    color: #333; /* Цвет заголовка */
+}
+
+/* --- Стили для формы калькулятора --- */
+.calculator-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между элементами формы */
+}
+
+.calculator-body label {
+    display: flex;
+    align-items: center; /* Выравнивание чекбоксов по центру строки */
+    gap: 5px; /* Расстояние между чекбоксом и текстом */
+    font-size: 14px;
+}
+
+.calculator-body input[type="number"],
+.calculator-body select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.calculator-body input[type="checkbox"] {
+    margin: 0;
+}
+
+#result {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    min-height: 20px; /* Минимальная высота для результата */
+}
+
+.calculator-body button {
+    padding: 10px 15px;
+    background-color: #28a745; /* Цвет кнопки рассчитать */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.calculator-body button:hover {
+    background-color: #218838; /* Темнее при наведении */
+}
