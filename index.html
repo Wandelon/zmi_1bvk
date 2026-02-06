@@ -1,0 +1,1311 @@
+<!DOCTYPE html><!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!--><html lang="ru-RU" class="no-js"><!--<![endif]--><head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<meta name="theme-color" content="#a70202">	<link rel="profile" href="http://gmpg.org/xfn/11">
+	        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                var originalAddEventListener = EventTarget.prototype.addEventListener,
+                    oldWidth = window.innerWidth;
+
+                EventTarget.prototype.addEventListener = function (eventName, eventHandler, useCapture) {
+                    if (eventName === "resize") {
+                        originalAddEventListener.call(this, eventName, function (event) {
+                            if (oldWidth === window.innerWidth) {
+                                return;
+                            }
+                            else if (oldWidth !== window.innerWidth) {
+                                oldWidth = window.innerWidth;
+                            }
+                            if (eventHandler.handleEvent) {
+                                eventHandler.handleEvent.call(this, event);
+                            }
+                            else {
+                                eventHandler.call(this, event);
+                            };
+                        }, useCapture);
+                    }
+                    else {
+                        originalAddEventListener.call(this, eventName, eventHandler, useCapture);
+                    };
+                };
+            };
+        </script>
+		<title>ООО «БВК» — Официальный сайт ООО «БВК», г. Челябинск</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500%2C600%2C700%7CRaleway%3A400%2C600%2C700%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRaleway%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&subset=cyrillic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500%2C600%2C700%7CRaleway%3A400%2C600%2C700%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRaleway%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&subset=cyrillic&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500%2C600%2C700%7CRaleway%3A400%2C600%2C700%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRaleway%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&subset=cyrillic&display=swap" /></noscript><link rel="stylesheet" href="css/76b1e38675f030e3bffaf05d9663b025.css" media="all" data-minify="1">
+<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="ООО «БВК» » Лента" href="https://bvk.konar.ru/feed/">
+<link rel="alternate" type="application/rss+xml" title="ООО «БВК» » Лента комментариев" href="https://bvk.konar.ru/comments/feed/">
+
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFF;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--accent: #a70202;--wp--preset--color--dark-gray: #111;--wp--preset--color--light-gray: #767676;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" id="the7-font-css" href="css/icomoon-the7-font.min.css" type="text/css" media="all">
+
+
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""><script type="text/javascript" id="jquery-core-js-extra">
+/* <![CDATA[ */
+var pp = {"ajax_url":"https:\/\/bvk.konar.ru\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/jquery.min.js" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<script type="text/javascript" id="layerslider-utils-js-extra">
+/* <![CDATA[ */
+var LS_Meta = {"v":"6.11.8","fixGSAP":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/layerslider.utils.js" id="layerslider-utils-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/layerslider.kreaturamedia.jquery.js" id="layerslider-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/layerslider.transitions.js" id="layerslider-transitions-js" defer=""></script>
+<script type="text/javascript" id="dt-above-fold-js-extra">
+/* <![CDATA[ */
+var dtLocal = {"themeUrl":"https:\/\/bvk.konar.ru\/wp-content\/themes\/dt-the7","passText":"\u0414\u043b\u044f \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430 \u044d\u0442\u043e\u0439 \u0437\u0430\u043a\u0440\u044b\u0442\u043e\u0439 \u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0446\u0438\u0438, \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043f\u0430\u0440\u043e\u043b\u044c \u043d\u0438\u0436\u0435:","moreButtonText":{"loading":"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 ...","loadMore":"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0435\u0449\u0451"},"postID":"565","ajaxurl":"https:\/\/bvk.konar.ru\/wp-admin\/admin-ajax.php","REST":{"baseUrl":"https:\/\/bvk.konar.ru\/wp-json\/the7\/v1","endpoints":{"sendMail":"\/send-mail"}},"contactMessages":{"required":"One or more fields have an error. Please check and try again.","terms":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u0440\u0438\u043c\u0438\u0442\u0435 \u043f\u043e\u043b\u0438\u0442\u0438\u043a\u0443 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438.","fillTheCaptchaError":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0437\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u0435 \u043a\u0430\u043f\u0447\u0443."},"captchaSiteKey":"","ajaxNonce":"137d96fdec","pageData":{"type":"page","template":"page","layout":null},"themeSettings":{"smoothScroll":"off","lazyLoading":false,"accentColor":{"mode":"solid","color":"#a70202"},"desktopHeader":{"height":120},"ToggleCaptionEnabled":"disabled","ToggleCaption":"\u041d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f","floatingHeader":{"showAfter":94,"showMenu":true,"height":90,"logo":{"showLogo":true,"html":"<img class=\" preload-me\" src=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png\" srcset=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w, https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w\" width=\"168\" height=\"80\"   sizes=\"168px\" alt=\"\u041e\u041e\u041e \u00ab\u0411\u0412\u041a\u00bb\" \/>","url":"https:\/\/bvk.konar.ru\/"}},"topLine":{"floatingTopLine":{"logo":{"showLogo":false,"html":""}}},"mobileHeader":{"firstSwitchPoint":992,"secondSwitchPoint":778,"firstSwitchPointHeight":100,"secondSwitchPointHeight":100,"mobileToggleCaptionEnabled":"disabled","mobileToggleCaption":"\u041c\u0435\u043d\u044e"},"stickyMobileHeaderFirstSwitch":{"logo":{"html":"<img class=\" preload-me\" src=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png\" srcset=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w, https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w\" width=\"168\" height=\"80\"   sizes=\"168px\" alt=\"\u041e\u041e\u041e \u00ab\u0411\u0412\u041a\u00bb\" \/>"}},"stickyMobileHeaderSecondSwitch":{"logo":{"html":"<img class=\" preload-me\" src=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png\" srcset=\"https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w, https:\/\/bvk.konar.ru\/wp-content\/uploads\/sites\/2\/2021\/06\/BVK-80.png 168w\" width=\"168\" height=\"80\"   sizes=\"168px\" alt=\"\u041e\u041e\u041e \u00ab\u0411\u0412\u041a\u00bb\" \/>"}},"content":{"textColor":"#606060","headerColor":"#333333"},"sidebar":{"switchPoint":992},"boxedWidth":"1280px","stripes":{"stripe1":{"textColor":"#787d85","headerColor":"#3b3f4a"},"stripe2":{"textColor":"#8b9199","headerColor":"#ffffff"},"stripe3":{"textColor":"#ffffff","headerColor":"#ffffff"}}},"elementor":{"settings":{"container_width":1140}}};
+var dtShare = {"shareButtonText":{"facebook":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u0441\u044f \u0432 Facebook","twitter":"\u0422\u0432\u0438\u0442\u043d\u0443\u0442\u044c","pinterest":"Pin it","linkedin":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u0441\u044f Linkedin","whatsapp":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 WhatsApp"},"overlayOpacity":"85"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/above-the-fold.min.js" id="dt-above-fold-js" defer=""></script>
+<meta name="generator" content="Powered by LayerSlider 6.11.8 - Multi-Purpose, Responsive, Parallax, Mobile-Friendly Slider Plugin for WordPress.">
+<!-- LayerSlider updates and docs at: https://layerslider.kreaturamedia.com -->
+<link rel="https://api.w.org/" href="https://bvk.konar.ru/wp-json/"><link rel="alternate" type="application/json" href="https://bvk.konar.ru/wp-json/wp/v2/pages/565"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://bvk.konar.ru/xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.5.7">
+<link rel="canonical" href="https://bvk.konar.ru/">
+<link rel="shortlink" href="https://bvk.konar.ru/">
+<link rel="alternate" type="application/json+oembed" href="https://bvk.konar.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbvk.konar.ru%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://bvk.konar.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbvk.konar.ru%2F&format=xml">
+<meta property="og:site_name" content="ООО «БВК»">
+<meta property="og:title" content="ООО «БВК»">
+<meta property="og:description" content="ООО «БВК» Сталелитейный завод ООО «БВК» создан в 2013 году компанией «КОНАР» совместно с итальянской компанией Cividale S.p.A. Является резидентом ООО «Индустриальный парк Станкомаш», г. Челябинск. ООО «БВК» – это одно из самых современных производств на территории Российской Федерации и Европы. Входит в литейно-кузнечный дивизион КОНАР совместно с ООО «СКТ» (г. Челябинск). Производственная мощность завода…">
+<meta property="og:url" content="https://bvk.konar.ru/">
+<meta property="og:type" content="website">
+<meta name="generator" content="Elementor 3.22.3; features: e_optimized_assets_loading, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
+<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"><link rel="icon" href="images/fav.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="images/fav.png"><link rel="apple-touch-icon" sizes="76x76" href="images/fav.png"><link rel="apple-touch-icon" sizes="120x120" href="images/fav.png"><link rel="apple-touch-icon" sizes="152x152" href="images/fav.png"><style id="the7-custom-inline-css" type="text/css">
+.sub-nav .menu-item i.fa,
+.sub-nav .menu-item i.fas,
+.sub-nav .menu-item i.far,
+.sub-nav .menu-item i.fab {
+	text-align: center;
+	width: 1.25em;
+}
+
+p {font-variant-numeric: lining-nums;
+font-feature-settings: 'lnum';
+-moz-font-feature-settings: 'lnum=1';
+-ms-font-feature-settings: 'lnum';
+-webkit-font-feature-settings: 'lnum';
+-o-font-feature-settings: 'lnum';}
+
+.post-entry-content {font-variant-numeric: lining-nums;
+font-feature-settings: 'lnum';
+-moz-font-feature-settings: 'lnum=1';
+-ms-font-feature-settings: 'lnum';
+-webkit-font-feature-settings: 'lnum';
+-o-font-feature-settings: 'lnum';}
+
+.elementor-widget-container {font-variant-numeric: lining-nums;
+font-feature-settings: 'lnum';
+-moz-font-feature-settings: 'lnum=1';
+-ms-font-feature-settings: 'lnum';
+-webkit-font-feature-settings: 'lnum';
+-o-font-feature-settings: 'lnum';}
+
+
+
+</style>
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(53363323, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/53363323" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="home page-template page-template-elementor_header_footer page page-id-565 wp-custom-logo wp-embed-responsive the7-core-ver-2.5.4 transparent title-off dt-responsive-on right-mobile-menu-close-icon ouside-menu-close-icon mobile-hamburger-close-bg-enable mobile-hamburger-close-bg-hover-enable  fade-medium-mobile-menu-close-icon fade-medium-menu-close-icon srcset-enabled btn-flat custom-btn-color custom-btn-hover-color phantom-sticky phantom-shadow-decoration phantom-custom-logo-on sticky-mobile-header top-header first-switch-logo-left first-switch-menu-right second-switch-logo-left second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style the7-ver-9.3.0 elementor-default elementor-template-full-width elementor-clear-template elementor-kit-4 elementor-page elementor-page-565">
+<!-- The7 9.3.0 -->
+
+<div id="page">
+	<a class="skip-link screen-reader-text" href="#content">Перейти к содержанию</a>
+
+<div class="masthead inline-header left light-preset-color widgets full-height full-width shadow-mobile-header-decoration small-mobile-menu-icon dt-parent-menu-clickable show-sub-menu-on-hover show-device-logo show-mobile-logo" style="background-color: rgba(0,0,0,0);" role="banner">
+
+	<div class="top-bar top-bar-empty top-bar-line-hide">
+	<div class="top-bar-bg" style="background-color: rgba(255,255,255,0);"></div>
+	<div class="mini-widgets left-widgets"></div><div class="mini-widgets right-widgets"></div></div>
+
+	<header class="header-bar">
+
+		<div class="branding">
+	<div id="site-title" class="assistive-text">ООО «БВК»</div>
+	<div id="site-description" class="assistive-text">Официальный сайт ООО «БВК», г. Челябинск</div>
+	<a class="" href="https://bvk.konar.ru/  "><img class=" preload-me" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20168%2080'%3E%3C/svg%3E" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w" width="168" height="80" data-lazy-sizes="168px" alt="ООО «БВК»" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png  "><noscript><img class=" preload-me" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png  " srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w" width="168" height="80"   sizes="168px" alt="ООО «БВК»" /></noscript><img class="mobile-logo preload-me" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20168%2080'%3E%3C/svg%3E" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w" width="168" height="80" data-lazy-sizes="168px" alt="ООО «БВК»" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png  "><noscript><img class=" mobile-logo preload-me" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png  " srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-80.png   168w" width="168" height="80"   sizes="168px" alt="ООО «БВК»" /></noscript></a></div>
+
+		<ul id="primary-menu" class="main-nav underline-decoration l-to-r-line outside-item-remove-margin" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-item-8 act first has-children" role="presentation"><a href="http://bvk.konar.ru" data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">О компании</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 first" role="presentation"><a href="https://bvk.konar.ru/texnologiya-proizvodstva/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Производство</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-411" role="presentation"><a href="https://bvk.konar.ru/kontrol-kachestva/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Контроль качества</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-459 has-children" role="presentation"><a href="https://bvk.konar.ru/sertifikaty-i-licenzii/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Сертификаты и лицензии</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-458 first" role="presentation"><a href="https://bvk.konar.ru/sertifikaty-i-licenzii/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Сертификаты и лицензии</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-457" role="presentation"><a href="https://bvk.konar.ru/rezultaty-specialnoj-ocenki-uslovij-truda/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Результаты специальной оценки условий труда</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647" role="presentation"><a href="https://bvk.konar.ru/informaciya-ob-nmu/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Информация о НМУ</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16 has-children" role="presentation"><a data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Продукция</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1476 first has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Литейная и кузнечная заготовка</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1477 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/stalnoe-lityo/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Стальное литьё</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1478" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/slitki/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Слитки</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-612 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Компоненты динамического оборудования</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-613 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/korpusnye-detali-nasosno-kompressornogo-oborudovaniya/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Корпусные детали насосно-компрессорного оборудования</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-614" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/rotory-valy-i-rabochie-kolesa/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Роторы, валы и рабочие колеса</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-615" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/detali-elektricheskix-mashin/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Детали электрических машин</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-616 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Винторулевые колонки и их компоненты</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-617 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/mexanicheskie-vintorulevye-kolonki/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Механические винторулевые колонки</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-618" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/grebnye-vinty/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Гребные винты</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-626 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/  " data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Трубопроводная арматура, устьевое оборудование</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-627 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/krupnogabaritnaya-truboprovodnaya-armatura/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Крупногабаритная трубопроводная арматура</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-628" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/truboprovodnaya-armatura-specialnogo-primeneniya/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Трубопроводная арматура специального применения</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-629" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/fontannaya-armatura-i-ustevoe-oborudovanie/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Фонтанная арматура и устьевое оборудование</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-74 has-children" role="presentation"><a href="http://#" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Услуги</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-75 first" role="presentation"><a href="https://konar.ru/produkciya-promyshленноj-gruppy-konar/uslugi/mexanicheskaya-obrabotka/  " data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Механическая обработка</span></span></a></li> </ul></li> </ul></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-468" role="presentation"><a href="https://bvk.konar.ru/postavshhikam/  " data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Поставщикам</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1351" role="presentation"><a href="https://konar.ru/news/  " data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Новости</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-482" role="presentation"><a href="https://bvk.konar.ru/kontakty/  " data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Контакты</span></span></a></li> </ul>
+		<div class="mini-widgets"><div class="mini-search hide-on-desktop in-menu-first-switch in-menu-second-switch overlay-search custom-icon"><form class="searchform mini-widget-searchform" role="search" method="get" action="https://bvk.konar.ru/  ">
+
+	<div class="screen-reader-text">Поиск:</div>
+
+	
+		<div class="overlay-search-wrap">
+			<input type="text" class="field searchform-s" name="s" value="" placeholder="Введите поисковую фразу..." title="Форма поиска">
+			<a href="" class="search-icon"><i class="the7-mw-icon-search-bold"></i></a>
+		</div>
+
+
+		<a href="" class="submit"><i class=" mw-icon the7-mw-icon-search-bold"></i><span>Поиск по сайту</span></a>
+
+				<input type="submit" class="assistive-text searchsubmit" value="Вперед!">
+</form>
+</div><div class="text-area hide-on-desktop hide-on-first-switch in-menu-second-switch"><p> <br> <br> </p>
+</div><div class="text-area hide-on-desktop hide-on-first-switch in-menu-second-switch"><p><a href="https://konar.ru  "><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20250%2062'%3E%3C/svg%3E" width="250" height="62" data-lazy-src="https://konar.ru/wp-content/uploads/2022/03/LogoKONAR.png  "><noscript><img src="https://konar.ru/wp-content/uploads/2022/03/LogoKONAR.png  "  width="250" height="62"></noscript></a></p>
+</div></div>
+	<!-- Кнопка калькулятора -->
+	<button id="calculatorTriggerButton" class="calculator-button-header">Калькулятор</button>
+	</header>
+
+	<!-- Модальное окно калькулятора -->
+	<div id="calculatorModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span> <!-- Кнопка закрытия -->
+			<h2 class="calculator-title">Калькулятор стоимости</h2>
+			<div class="calculator-body">
+				<form id="calculator-form">
+					<label for="mass">Масса (кг):</label>
+					<input type="number" id="mass" name="mass" step="any" required>
+
+					<label for="alloy">Сплав:</label>
+					<select id="alloy" name="alloy" required>
+						<option value="" disabled selected>Выберите сплав</option>
+						<!-- Опции будут добавлены через JS -->
+					</select>
+
+					<label>
+						<input type="checkbox" id="machining" name="machining"> Механическая обработка (+15%)
+					</label>
+
+					<label>
+						<input type="checkbox" id="certificate" name="certificate"> Сертификат (+5%)
+					</label>
+
+					<div id="result">Цена: — руб.</div>
+
+					<button type="submit">Рассчитать</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Стили и скрипты -->
+	<link rel="stylesheet" href="css/calculator.css">
+	<script src="js/calculator.js"></script>
+</div>
+<div class="dt-mobile-header mobile-menu-show-divider">
+	<div class="dt-close-mobile-menu-icon"><div class="close-line-wrap"><span class="close-line"></span><span class="close-line"></span><span class="close-line"></span></div></div>	<ul id="mobile-menu" class="mobile-main-nav" role="menubar">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-item-8 act first has-children" role="presentation"><a href="http://bvk.konar.ru" data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">О компании</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 first" role="presentation"><a href="https://bvk.konar.ru/texnologiya-proizvodstva/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Производство</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-411" role="presentation"><a href="https://bvk.konar.ru/kontrol-kachestva/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Контроль качества</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-459 has-children" role="presentation"><a href="https://bvk.konar.ru/sertifikaty-i-licenzii/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Сертификаты и лицензии</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-458 first" role="presentation"><a href="https://bvk.konar.ru/sertifikaty-i-licenzii/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Сертификаты и лицензии</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-457" role="presentation"><a href="https://bvk.konar.ru/rezultaty-specialnoj-ocenki-uslovij-truda/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Результаты специальной оценки условий труда</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647" role="presentation"><a href="https://bvk.konar.ru/informaciya-ob-nmu/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Информация о НМУ</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16 has-children" role="presentation"><a data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Продукция</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1476 first has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Литейная и кузнечная заготовка</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1477 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/stalnoe-lityo/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Стальное литьё</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1478" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/slitki/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Слитки</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-612 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Компоненты динамического оборудования</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-613 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/korpusnye-detali-nasosno-kompressornogo-oborudovaniya/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Корпусные детали насосно-компрессорного оборудования</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-614" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/rotory-valy-i-rabochie-kolesa/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Роторы, валы и рабочие колеса</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-615" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/detali-elektricheskix-mashin/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Детали электрических машин</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-616 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Винторулевые колонки и их компоненты</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-617 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/mexanicheskie-vintorulevye-kolonki/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Механические винторулевые колонки</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-618" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/grebnye-vinty/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Гребные винты</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-626 has-children" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Трубопроводная арматура, устьевое оборудование</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-627 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/krupnogabaritnaya-truboprovodnaya-armatura/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Крупногабаритная трубопроводная арматура</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-628" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/truboprovodnaya-armatura-specialnogo-primeneniya/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Трубопроводная арматура специального применения</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-629" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/fontannaya-armatura-i-ustevoe-oborudovanie/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Фонтанная арматура и устьевое оборудование</span></span></a></li> </ul></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-74 has-children" role="presentation"><a href="http://#" data-level="2" role="menuitem"><span class="menu-item-text"><span class="menu-text">Услуги</span></span></a><ul class="sub-nav hover-style-bg level-arrows-on" role="menubar"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-75 first" role="presentation"><a href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/uslugi/mexanicheskaya-obrabotka/" data-level="3" role="menuitem"><span class="menu-item-text"><span class="menu-text">Механическая обработка</span></span></a></li> </ul></li> </ul></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-468" role="presentation"><a href="https://bvk.konar.ru/postavshhikam/" data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Поставщикам</span></span></a></li> <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1351" role="presentation"><a href="https://konar.ru/news/" data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Новости</span></span></a></li> <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-482" role="presentation"><a href="https://bvk.konar.ru/kontakty/" data-level="1" role="menuitem"><span class="menu-item-text"><span class="menu-text">Контакты</span></span></a></li> 	</ul>
+	<div class="mobile-mini-widgets-in-menu"></div>
+</div>
+
+
+
+<div id="main" class="sidebar-none sidebar-divider-vertical">
+
+	
+	<div class="main-gradient"></div>
+	<div class="wf-wrap">
+	<div class="wf-container-main">
+
+	
+
+
+	<div id="content" class="content" role="main">
+
+				<div data-elementor-type="wp-page" data-elementor-id="565" class="elementor elementor-565">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-581bbb4 elementor-section-full_width elementor-section-height-min-height elementor-section-stretched elementor-hidden-mobile elementor-section-height-default elementor-section-items-middle" data-id="581bbb4" data-element_type="section" data-settings="{" stretch_section":"section-stretched","background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-bf5adbf" data-id="bf5adbf" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-c6bf8f3 elementor-section-full_width elementor-section-height-min-height elementor-section-stretched elementor-hidden-desktop elementor-hidden-tablet elementor-section-height-default elementor-section-items-middle" data-id="c6bf8f3" data-element_type="section" data-settings="{" stretch_section":"section-stretched","background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c8fbdd3" data-id="c8fbdd3" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-363ffc41 elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default" data-id="363ffc41" data-element_type="section" data-settings="{" stretch_section":"section-stretched","background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6c696fb" data-id="6c696fb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-44dc533 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="44dc533" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-19e093a" data-id="19e093a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5dbcd50 elementor-widget elementor-widget-text-editor" data-id="5dbcd50" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ООО «БВК»</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-1291bf2 elementor-widget elementor-widget-text-editor" data-id="1291bf2" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Сталелитейный завод ООО «БВК» создан в 2013 году компанией «КОНАР» совместно с итальянской компанией Cividale S.p.A. Является резидентом ООО «Индустриальный парк Станкомаш», г. Челябинск.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-95507f0 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="95507f0" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-9be7639" data-id="9be7639" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-f929073 elementor-widget elementor-widget-text-editor" data-id="f929073" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ООО «БВК» – это одно из самых современных производств на территории Российской Федерации и Европы. Входит в литейно-кузнечный дивизион КОНАР совместно с ООО «СКТ» (г. Челябинск).</p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-4392909" data-id="4392909" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5bfed85 elementor-widget elementor-widget-image" data-id="5bfed85" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img fetchpriority="high" decoding="async" width="700" height="467" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20467'%3E%3C/svg%3E" class="attachment-large size-large wp-image-35" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1-300x200.jpg 300w" data-lazy-sizes="(max-width: 700px) 100vw, 700px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1.jpg"><noscript><img fetchpriority="high" decoding="async" width="700" height="467" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1.jpg" class="attachment-large size-large wp-image-35" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/001-1-300x200.jpg 300w" sizes="(max-width: 700px) 100vw, 700px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-cccdcab elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="cccdcab" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-ecb5eac" data-id="ecb5eac" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-cadfe98 elementor-widget elementor-widget-image" data-id="cadfe98" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img decoding="async" width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+				<div class="elementor-element elementor-element-af61e5d elementor-hidden-mobile elementor-widget elementor-widget-text-editor" data-id="af61e5d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Производственная мощность завода составляет 35 000 тонн жидкой стали в год.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-87e5b05 elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-text-editor" data-id="87e5b05" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Производственная мощность завода составляет 35 000 тонн жидкой стали в год.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-29e5383 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="29e5383" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-962ecef" data-id="962ecef" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d49a02d elementor-widget elementor-widget-image" data-id="d49a02d" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img decoding="async" width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-e0b23b8 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="e0b23b8" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c40796e" data-id="c40796e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-6cec997 elementor-widget elementor-widget-image" data-id="6cec997" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="700" height="467" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20467'%3E%3C/svg%3E" class="attachment-large size-large wp-image-45" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1-300x200.jpg 300w" data-lazy-sizes="(max-width: 700px) 100vw, 700px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1.jpg"><noscript><img decoding="async" width="700" height="467" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1.jpg" class="attachment-large size-large wp-image-45" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/004-1-300x200.jpg 300w" sizes="(max-width: 700px) 100vw, 700px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-cbf890b" data-id="cbf890b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-10dd0c3 elementor-widget elementor-widget-text-editor" data-id="10dd0c3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Используемая технология литейных форм из холодно-твердеющих смесей позволяет получать самые сложные крупногабаритные отливки весом от 300 кг до 30 тонн из углеродистых и низкоуглеродистых марок сталей с содержанием углерода до 0,02%, а также высоколегированных, коррозионностойких жаростойких и жаропрочных марок сталей аустенитного и мартенситного классов Superduplex.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-7cc454a elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7cc454a" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-9d05d85" data-id="9d05d85" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b67a7f1 elementor-widget elementor-widget-text-editor" data-id="b67a7f1" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Также для изготовления рабочих колёс перекачивающих агрегатов применяется технология литья в керамические формы («Шоу-процесс»), позволяющая получать отливки повышенной прочности от 10 кг до 300 кг из любой марки стали.</p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-144e915" data-id="144e915" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-35493b2 elementor-widget elementor-widget-image" data-id="35493b2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="700" height="467" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20467'%3E%3C/svg%3E" class="attachment-large size-large wp-image-36" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1-300x200.jpg 300w" data-lazy-sizes="(max-width: 700px) 100vw, 700px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1.jpg"><noscript><img loading="lazy" decoding="async" width="700" height="467" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1.jpg" class="attachment-large size-large wp-image-36" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1.jpg 700w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/003-1-300x200.jpg 300w" sizes="(max-width: 700px) 100vw, 700px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-7971ea0 elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default" data-id="7971ea0" data-element_type="section" data-settings="{" stretch_section":"section-stretched","background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7eb7fad" data-id="7eb7fad" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-8a235a6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="8a235a6" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-f73ed3e" data-id="f73ed3e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-9053716 elementor-hidden-mobile elementor-widget elementor-widget-text-editor" data-id="9053716" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>СЕРТИФИКАТЫ И ЛИЦЕНЗИИ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-8a963ff elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-text-editor" data-id="8a963ff" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>СЕРТИФИКАТЫ И ЛИЦЕНЗИИ</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-ba1c8d3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ba1c8d3" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-0796613" data-id="0796613" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-987053f elementor-widget elementor-widget-image" data-id="987053f" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-scaled.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Лицензия" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NDI4LCJ1cmwiOiJodHRwczpcL1wvYnZrLmtvbmFyLnJ1XC93cC1jb250ZW50XC91cGxvYWRzXC9zaXRlc1wvMlwvMjAyMVwvMDdcLzAwMi1zY2FsZWQuanBnIn0%3D">
+							<img loading="lazy" decoding="async" width="739" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20739%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-739x1024.jpg" class="lazy-load attachment-large size-large wp-image-428" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-739x1024.jpg 739w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-216x300.jpg 216w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-768x1065.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-1108x1536.jpg 1108w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-1478x2048.jpg 1478w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/07/002-scaled.jpg 1847w" sizes="(max-width: 739px) 100vw, 739px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-7909934" data-id="7909934" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-bce24a6 elementor-widget elementor-widget-image" data-id="bce24a6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Сертификат-СМК--ГОСТ-Р" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjM0MSwidXJsIjoiaHR0cHM6XC9cL2J2ay5rb25hci5ydVwvd3AtY29udGVudFwvdXBsb2Fkc1wvc2l0ZXNcLzJcLzIwMjVcLzA3XC9cdTA0MjFcdTA0MzVcdTA0NDBcdTA0NDJcdTA0MzhcdTA0NDRcdTA0MzhcdTA0M2FcdTA0MzBcdTA0NDItXHUwNDIxXHUwNDFjXHUwNDFhLVx1MDQxM1x1MDQxZVx1MDQyMVx1MDQyMi1cdTA0MjAuanBnIn0%3D">
+							<img loading="lazy" decoding="async" width="724" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20724%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р-724x1024.jpg" class="lazy-load attachment-large size-large wp-image-2341" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р-724x1024.jpg 724w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р-212x300.jpg 212w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р-768x1087.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р-1086x1536.jpg 1086w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/07/Сертификат-СМК-ГОСТ-Р.jpg 1200w" sizes="(max-width: 724px) 100vw, 724px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-4346d6f" data-id="4346d6f" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-a1b053d elementor-widget elementor-widget-image" data-id="a1b053d" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Bureau-Veritas-2021-1" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NzY0LCJ1cmwiOiJodHRwczpcL1wvYnZrLmtvbmFyLnJ1XC93cC1jb250ZW50XC91cGxvYWRzXC9zaXRlc1wvMlwvMjAyMVwvMDlcL0J1cmVhdS1WZXJpdGFzLTIwMjEtMS5qcGcifQ%3D%3D">
+							<img loading="lazy" decoding="async" width="722" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20722%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1-722x1024.jpg" class="lazy-load attachment-large size-large wp-image-764" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1-722x1024.jpg 722w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1-212x300.jpg 212w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1-768x1089.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1-1083x1536.jpg 1083w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-1.jpg 1200w" sizes="(max-width: 722px) 100vw, 722px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-12769b5" data-id="12769b5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-3a8a1c3 elementor-widget elementor-widget-image" data-id="3a8a1c3" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Bureau-Veritas-2021-2" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NzY1LCJ1cmwiOiJodHRwczpcL1wvYnZrLmtvbmFyLnJ1XC93cC1jb250ZW50XC91cGxvYWRzXC9zaXRlc1wvMlwvMjAyMVwvMDlcL0J1cmVhdS1WZXJpdGFzLTIwMjEtMi5qcGcifQ%3D%3D">
+							<img loading="lazy" decoding="async" width="722" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20722%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2-722x1024.jpg" class="lazy-load attachment-large size-large wp-image-765" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2-722x1024.jpg 722w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2-212x300.jpg 212w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2-768x1089.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2-1083x1536.jpg 1083w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Bureau-Veritas-2021-2.jpg 1200w" sizes="(max-width: 722px) 100vw, 722px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-3c34883 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3c34883" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-be6efe9" data-id="be6efe9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-e6243d2 elementor-widget elementor-widget-image" data-id="e6243d2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Свительство-РМРС-2021-1" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NzY2LCJ1cmwiOiJodHRwczpcL1wvYnZrLmtvbmFyLnJ1XC93cC1jb250ZW50XC91cGxvYWRzXC9zaXRlc1wvMlwvMjAyMVwvMDlcL1x1MDQyMVx1MDQzMlx1MDQzOFx1MDQ0Mlx1MDQzNVx1MDQzYlx1MDQ0Y1x1MDQ0MVx1MDQ0Mlx1MDQzMlx1MDQzZS1cdTA0MjBcdTA0MWNcdTA0MjBcdTA0MjEtMjAyMS0xLmpwZyJ9">
+							<img loading="lazy" decoding="async" width="724" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20724%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1-724x1024.jpg" class="lazy-load attachment-large size-large wp-image-766" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1-724x1024.jpg 724w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1-212x300.jpg 212w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1-768x1086.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1-1086x1536.jpg 1086w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-1.jpg 1200w" sizes="(max-width: 724px) 100vw, 724px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-8a39c7a" data-id="8a39c7a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b6a1d9b elementor-widget elementor-widget-image" data-id="b6a1d9b" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Свительство-РМРС-2021-2" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6NzY3LCJ1cmwiOiJodHRwczpcL1wvYnZrLmtvbmFyLnJ1XC93cC1jb250ZW50XC91cGxvYWRzXC9zaXRlc1wvMlwvMjAyMVwvMDlcL1x1MDQyMVx1MDQzMlx1MDQzOFx1MDQ0Mlx1MDQzNVx1MDQzYlx1MDQ0Y1x1MDQ0MVx1MDQ0Mlx1MDQzMlx1MDQzZS1cdTA0MjBcdTA0MWNcdTA0MjBcdTA0MjEtMjAyMS0yLmpwZyJ9">
+							<img loading="lazy" decoding="async" width="724" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20724%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2-724x1024.jpg" class="lazy-load attachment-large size-large wp-image-767" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2-724x1024.jpg 724w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2-212x300.jpg 212w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2-768x1086.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2-1086x1536.jpg 1086w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/09/Свительство-РМРС-2021-2.jpg 1200w" sizes="(max-width: 724px) 100vw, 724px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-17e51a5" data-id="17e51a5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b9ab6e3 elementor-widget elementor-widget-image" data-id="b9ab6e3" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-scaled.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Политика СМК 2023г" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjMyNSwidXJsIjoiaHR0cHM6XC9cL2J2ay5rb25hci5ydVwvd3AtY29udGVudFwvdXBsb2Fkc1wvc2l0ZXNcLzJcLzIwMjVcLzA2XC9cdTA0MWZcdTA0M2VcdTA0M2JcdTA0MzhcdTA0NDJcdTA0MzhcdTA0M2FcdTA0MzAtXHUwNDIxXHUwNDFjXHUwNDFhLTIwMjNcdTA0MzMtc2NhbGVkLmpwZyJ9">
+							<img loading="lazy" decoding="async" width="739" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20739%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-739x1024.jpg" class="lazy-load attachment-large size-large wp-image-2325" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-739x1024.jpg 739w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-216x300.jpg 216w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-768x1065.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-1108x1536.jpg 1108w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-1478x2048.jpg 1478w, https://bvk.konar.ru/wp-content/uploads/sites/2/2025/06/Политика-СМК-2023г-scaled.jpg 1847w" sizes="(max-width: 739px) 100vw, 739px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-9838726" data-id="9838726" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-32cc422 elementor-widget elementor-widget-image" data-id="32cc422" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-title="Политика-в-области-культуры-безопасности-2023г" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MTk3MCwidXJsIjoiaHR0cHM6XC9cL2J2ay5rb25hci5ydVwvd3AtY29udGVudFwvdXBsb2Fkc1wvc2l0ZXNcLzJcLzIwMjRcLzA1XC9cdTA0MWZcdTA0M2VcdTA0M2JcdTA0MzhcdTA0NDJcdTA0MzhcdTA0M2FcdTA0MzAtXHUwNDMyLVx1MDQzZVx1MDQzMVx1MDQzYlx1MDQzMFx1MDQ0MVx1MDQ0Mlx1MDQzOC1cdTA0M2FcdTA0NDNcdTA0M2JcdTA0NGNcdTA0NDJcdTA0NDNcdTA0NDBcdTA0NGItXHUwNDMxXHUwNDM1XHUwNDM3XHUwNDNlXHUwNDNmXHUwNDMwXHUwNDQxXHUwNDNkXHUwNDNlXHUwNDQxXHUwNDQyXHUwNDM4LTIwMjNcdTA0MzMuanBnIn0%3D">
+							<img loading="lazy" decoding="async" width="739" height="1024" src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20739%201024%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г-739x1024.jpg" class="lazy-load attachment-large size-large wp-image-1970" alt="" data-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г-739x1024.jpg 739w, https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г-216x300.jpg 216w, https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г-768x1064.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г-1108x1536.jpg 1108w, https://bvk.konar.ru/wp-content/uploads/sites/2/2024/05/Политика-в-области-культуры-безопасности-2023г.jpg 1200w" sizes="(max-width: 739px) 100vw, 739px">								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-079461f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="079461f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-5b95892" data-id="5b95892" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-54abc0c elementor-widget elementor-widget-text-editor" data-id="54abc0c" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>С сентября 2013 года система менеджмента качества ООО «БВК» успешно сертифицирована и применяется в соответствии с требованиями международного стандарта ISO 9001:2015.</p><p> </p><p>С апреля 2018 года система экологического менеджмента и система менеджмента в области профессиональной безопасности и охраны труда ООО «БВК» успешно сертифицирована и применяется в соответствии с требованиями международного стандарта ISO 14001:2015, ISO 45001:2018.</p><p> </p><p>Ежегодно предприятие проходит инспекционный аудит системы менеджмента качества на соответствие требованиям ISO 9001.</p><p> </p><p>В июле 2021 года ООО «БВК» признано Российским морским регистром судоходства как изготовитель отливок гребных винтов со съемными лопастями и детали винторулевых колонок до 18 тонн включительно из сталей легированных и коррозионностойких класса М-1.</p><p> </p><p>В августе 2021 года ООО «БВК» признано Bureau Veritas (Франция) изготовителем отливок из мартенситной нержавеющей стали.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-f7cde0d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f7cde0d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-c9b02ed" data-id="c9b02ed" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-a42d7be elementor-widget elementor-widget-text-editor" data-id="a42d7be" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ООО «БВК» – надежный поставщик литых заготовок и стальных слитков.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-a860a31 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="a860a31" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-a066017" data-id="a066017" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-81fdc11 elementor-widget elementor-widget-image" data-id="81fdc11" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img decoding="async" width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-5a6e08d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5a6e08d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-f3692ac" data-id="f3692ac" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-9282321 elementor-hidden-mobile elementor-widget elementor-widget-text-editor" data-id="9282321" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>НОВОСТИ<br>ПРОМЫШЛЕННОЙ ГРУППЫ КОНАР</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-071c6b8 elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-text-editor" data-id="071c6b8" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>НОВОСТИ<br>ПРОМЫШЛЕННОЙ ГРУППЫ КОНАР</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-5f9fe15 elementor-grid-3 elementor-grid-tablet-2 elementor-grid-mobile-1 elementor-posts--thumbnail-top elementor-widget elementor-widget-posts" data-id="5f9fe15" data-element_type="widget" data-settings="{" classic_columns":"3","classic_columns_tablet":"2","classic_columns_mobile":"1","classic_row_gap":{"unit":"px","size":35,"sizes":[]},"classic_row_gap_tablet":{"unit":"px","size":"","sizes":[]},"classic_row_gap_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="posts.classic">
+				<div class="elementor-widget-container">
+					<div class="elementor-posts-container elementor-posts elementor-posts--skin-classic elementor-grid">
+				<article class="elementor-post elementor-grid-item post-2471 post type-post status-publish format-standard has-post-thumbnail hentry category-novosti category-4 description-off">
+				<a class="elementor-post__thumbnail__link" href="https://bvk.konar.ru/novosti/v-konare-dan-start-novoj-programme-korporativnogo-obucheniya/">
+			<div class="elementor-post__thumbnail"><img loading="lazy" decoding="async" width="300" height="199" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20199'%3E%3C/svg%3E" class="attachment-medium size-medium wp-image-2472" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-300x199.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1024x680.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-768x510.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file.jpg 1441w" data-lazy-sizes="(max-width: 300px) 100vw, 300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-300x199.jpg"><noscript><img loading="lazy" decoding="async" width="300" height="199" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-300x199.jpg" class="attachment-medium size-medium wp-image-2472" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-300x199.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1024x680.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-768x510.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file.jpg 1441w" sizes="(max-width: 300px) 100vw, 300px" /></noscript></div>
+		</a>
+				<div class="elementor-post__text">
+				<h3 class="elementor-post__title">
+			<a href="https://bvk.konar.ru/novosti/v-konare-dan-start-novoj-programme-korporativnogo-obucheniya/">
+				В КОНАРе дан старт новой программе корпоративного обучения			</a>
+		</h3>
+				<div class="elementor-post__meta-data">
+					<span class="elementor-post-date">
+			29 декабря 2025		</span>
+				</div>
+				<div class="elementor-post__excerpt">
+			<p>«Школа бизнес-образования» стала одним из блоков масштабного проекта по развитию персонала.</p>
+		</div>
+				</div>
+				</article>
+				<article class="elementor-post elementor-grid-item post-2473 post type-post status-publish format-standard has-post-thumbnail hentry category-novosti category-4 description-off">
+				<a class="elementor-post__thumbnail__link" href="https://bvk.konar.ru/novosti/v-uchebnom-centre-konar-sozdali-kurs-dlya-obucheniya-kontrolerov/">
+			<div class="elementor-post__thumbnail"><img loading="lazy" decoding="async" width="300" height="187" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20187'%3E%3C/svg%3E" class="attachment-medium size-medium wp-image-2474" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-300x187.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-1024x638.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-768x479.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1.jpg 1511w" data-lazy-sizes="(max-width: 300px) 100vw, 300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-300x187.jpg"><noscript><img loading="lazy" decoding="async" width="300" height="187" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-300x187.jpg" class="attachment-medium size-medium wp-image-2474" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-300x187.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-1024x638.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1-768x479.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/unnamed-file-1.jpg 1511w" sizes="(max-width: 300px) 100vw, 300px" /></noscript></div>
+		</a>
+				<div class="elementor-post__text">
+				<h3 class="elementor-post__title">
+			<a href="https://bvk.konar.ru/novosti/v-uchebnom-centre-konar-sozdali-kurs-dlya-obucheniya-kontrolerov/">
+				В учебном центре КОНАР создали курс для обучения контролеров			</a>
+		</h3>
+				<div class="elementor-post__meta-data">
+					<span class="elementor-post-date">
+			24 декабря 2025		</span>
+				</div>
+				<div class="elementor-post__excerpt">
+			<p>«Школа ВИК» – уникальный образовательный проект для специалистов по визуально-измерительному контролю.</p>
+		</div>
+				</div>
+				</article>
+				<article class="elementor-post elementor-grid-item post-2475 post type-post status-publish format-standard has-post-thumbnail hentry category-novosti category-4 description-off">
+				<a class="elementor-post__thumbnail__link" href="https://bvk.konar.ru/novosti/generalnyj-direktor-konara-vstretilsya-so-studentami-yuurgu/">
+			<div class="elementor-post__thumbnail"><img loading="lazy" decoding="async" width="300" height="200" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20200'%3E%3C/svg%3E" class="attachment-medium size-medium wp-image-2476" alt="Генеральный директор КОНАРа встретился со студентами ЮУрГУ" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-300x200.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-1024x682.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-768x512.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2.jpg 1417w" data-lazy-sizes="(max-width: 300px) 100vw, 300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-300x200.jpg"><noscript><img loading="lazy" decoding="async" width="300" height="200" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-300x200.jpg" class="attachment-medium size-medium wp-image-2476" alt="Генеральный директор КОНАРа встретился со студентами ЮУрГУ" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-300x200.jpg 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-1024x682.jpg 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2-768x512.jpg 768w, https://bvk.konar.ru/wp-content/uploads/sites/2/2026/01/2.jpg 1417w" sizes="(max-width: 300px) 100vw, 300px" /></noscript></div>
+		</a>
+				<div class="elementor-post__text">
+				<h3 class="elementor-post__title">
+			<a href="https://bvk.konar.ru/novosti/generalnyj-direktor-konara-vstretilsya-so-studentami-yuurgu/">
+				Генеральный директор КОНАРа встретился со студентами ЮУрГУ			</a>
+		</h3>
+				<div class="elementor-post__meta-data">
+					<span class="elementor-post-date">
+			08 декабря 2025		</span>
+				</div>
+				<div class="elementor-post__excerpt">
+			<p>Валерий Бондаренко подчеркнул важность инженерного мышления в любой сфере деятельности.</p>
+		</div>
+				</div>
+				</article>
+				</div>
+
+
+		
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-4147d33 elementor-widget elementor-widget-template" data-id="4147d33" data-element_type="widget" data-widget_type="template.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-template">
+					<div data-elementor-type="section" data-elementor-id="533" class="elementor elementor-533">
+					<div class="elementor-section-wrap">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-238dc8e6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="238dc8e6" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-36d50bb7" data-id="36d50bb7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-468017a5 elementor-align-center elementor-widget elementor-widget-button" data-id="468017a5" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a class="elementor-button elementor-button-link elementor-size-sm" href="https://konar.ru/news/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">ЧИТАТЬ ВСЕ НОВОСТИ</span>
+					</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+							</div>
+				</div>
+				</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		
+	</div><!-- #content -->
+
+	
+
+
+			</div><!-- .wf-container -->
+		</div><!-- .wf-wrap -->
+
+	
+	</div><!-- #main -->
+
+	
+
+	
+	<!-- !Footer -->
+	<footer id="footer" class="footer solid-bg">
+
+		
+			<div class="wf-wrap">
+				<div class="wf-container-footer">
+					<div class="wf-container">
+						<section id="elementor-library-3" class="widget widget_elementor-library wf-cell wf-1-1">		<div data-elementor-type="section" data-elementor-id="52" class="elementor elementor-52">
+					<div class="elementor-section-wrap">
+								<section data-uael-partstyle="default" data-uael-partcolor="" data-uael-partopacity="" data-uael-partdirection="bottom" data-uael-partnum="50" data-uael-partsize="1" data-uael-partspeed="1" data-uael-interactive="no" class="elementor-section elementor-top-section elementor-element elementor-element-37b9a167 elementor-section-full_width elementor-section-stretched uael-particle-yes uael-particle-adv-yes elementor-section-height-default elementor-section-height-default" data-id="37b9a167" data-element_type="section" data-settings="{" stretch_section":"section-stretched","background_background":"gradient"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5868e01e" data-id="5868e01e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-296a01a4 elementor-section-full_width elementor-section-height-min-height elementor-section-content-top elementor-section-height-default" data-id="296a01a4" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-custom">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-ae14c32" data-id="ae14c32" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-4d3c3d59 elementor-widget elementor-widget-image" data-id="4d3c3d59" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="https://bvk.konar.ru">
+							<img width="300" height="1000" class="lazy-load " src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20300%201000%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/BVK-350-w.png" title="BVK-350-w" alt="BVK-350-w" loading="lazy">								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-6af80cb6 elementor-widget elementor-widget-text-editor" data-id="6af80cb6" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>КОНТАКТЫ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-264c7bc9 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="264c7bc9" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-153752c8 elementor-widget elementor-widget-text-editor" data-id="153752c8" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>ООО «БВК»</strong><br>454010, Россия, г. Челябинск,<br>ул. Енисейская, 52</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-15f26741 elementor-widget elementor-widget-text-editor" data-id="15f26741" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Тел.: +7 (351) 216-97-77<br>Факс: +7 (351) 216 98 88</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-58070a1 elementor-widget elementor-widget-text-editor" data-id="58070a1" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>E-mail:<a style="color: #ffffff; text-decoration: underline;" href="mailto:bvk@bvk74.ru">bvk@bvk74.ru</a><br>Сайт: <a style="color: #ffffff; text-decoration: underline;" href="https://bvk.konar.ru">bvk.konar.ru</a></p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-27725b80 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="27725b80" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-3bb968e1 elementor-widget elementor-widget-text-editor" data-id="3bb968e1" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>© Все права защищены | ООО «БВК» | 2026 г.</p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-1feb9b49 elementor-hidden-phone" data-id="1feb9b49" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-38e688a0 elementor-hidden-phone elementor-widget elementor-widget-text-editor" data-id="38e688a0" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>О КОМПАНИИ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-31bcf84 elementor-hidden-phone elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="31bcf84" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-6d76ad33 elementor-hidden-phone elementor-widget elementor-widget-text-editor" data-id="6d76ad33" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<ul>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://bvk.konar.ru/istoriya-ooo-bvk/">История</a></li>
+<li><a style="color: #ffffff; text-decoration: underline;" https:="" bvk.konar.ru="" texnologiya-proizvodstva="" "="">Производство</a></li>
+<li><a style="color: #ffffff; text-decoration: underline;" https:="" bvk.konar.ru="" kontrol-kachestva="" "="">Контроль качества</a></li>
+ 	
+</ul>						</div>
+				</div>
+				<div class="elementor-element elementor-element-35c6f8d elementor-widget elementor-widget-text-editor" data-id="35c6f8d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ДОКУМЕНТАЦИЯ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-13952d2 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="13952d2" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-ebca185 elementor-hidden-phone elementor-widget elementor-widget-text-editor" data-id="ebca185" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<ul>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://bvk.konar.ru/sertifikaty-i-licenzii/">Сертификаты и лицензии</a></li>
+ 	<li><a style="color:#ffffff; text-decoration:underline;" href="https://bvk.konar.ru/rezultaty-specialnoj-ocenki-uslovij-truda/">Результаты специальной оценки условий труда</a></li>
+</ul>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-104df532 elementor-hidden-phone" data-id="104df532" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-571bb03b elementor-widget elementor-widget-text-editor" data-id="571bb03b" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ПРОДУКЦИЯ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-5f1010b5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="5f1010b5" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-64f0240b elementor-widget elementor-widget-text-editor" data-id="64f0240b" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<ul>
+<li><a style="color: #ffffff; text-decoration: underline;" https:="" konar.ru="" produkciya-promyshlennoj-gruppy-konar="" litejnaya-i-kuznechnaya-zagotovka="" "="">Литейная и кузнечная заготовка</a></li> 
+<li><a style="color: #ffffff; text-decoration: underline;" https:="" konar.ru="" produkciya-promyshlennoj-gruppy-konar="" litejnaya-i-kuznechnaya-zagotovka="" stalnoe-lityo="" "="">Стальное литье</a></li> 
+<li><a style="color: #ffffff; text-decoration: underline;" https:="" konar.ru="" produkciya-promyshlennoj-gruppy-konar="" litejnaya-i-kuznechnaya-zagotovka="" slitki="" "="">Слитки</a></li> 	
+<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/komponenty-dinamicheskogo-oborudovaniya/">Компоненты динамического оборудования</a></li>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/vintorulevye-kolonki/">Винторулевые колонки и их компоненты</a></li>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/fasonnoe-stalnoe-lityo/">Фасонное стальное литье</a></li>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/litejnaya-i-kuznechnaya-zagotovka/slitki/">Слитки</a></li>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/truboprovodnaya-armatura-ustevoe-oborudovanie/">Трубопроводная арматура, устьевое оборудование</a></li>
+ 	<li><a style="color: #ffffff; text-decoration: underline;" href="https://konar.ru/produkciya-promyshlennoj-gruppy-konar/uslugi/mexanicheskaya-obrabotka/">Механическая обработка</a></li>
+</ul>						</div>
+				</div>
+				<div class="elementor-element elementor-element-3827017f elementor-widget elementor-widget-text-editor" data-id="3827017f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>ПРЕСС-ЦЕНТР</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-5c961e16 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="5c961e16" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-4bc27192 elementor-widget elementor-widget-text-editor" data-id="4bc27192" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<ul>
+ 	<li><a style="color:#ffffff; text-decoration:underline;" href="https://bvk.konar.ru/novosti/">Новости компании</a></li>
+ 	<li><a style="color:#ffffff; text-decoration:underline;" href="https://bvk.konar.ru/informaciya-ob-nmu/">Информация об НМУ</a></li>
+</ul>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-235ff6d5" data-id="235ff6d5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-360d32a8 elementor-widget elementor-widget-image" data-id="360d32a8" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="https://konar.ru">
+							<img width="250" height="1000" class="lazy-load " src="svg%2Bxml%3Bcharset%3Dutf-8%2C_svg%20xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%20viewBox%253D%270%200%20250%201000%27%252F_" data-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/06/logoKonar-400w.png" title="Промышленная группа КОНАР" alt="Промышленная группа КОНАР" loading="lazy">								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-beb17a1 elementor-widget elementor-widget-text-editor" data-id="beb17a1" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>КОНТАКТЫ</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-753bc1ec elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="753bc1ec" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-441e12a2 elementor-widget elementor-widget-text-editor" data-id="441e12a2" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Промышленная группа КОНАР</strong><br>454010, Россия, г. Челябинск,<br>ул. Енисейская, 8</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-6af4f235 elementor-widget elementor-widget-text-editor" data-id="6af4f235" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							Тел.: +7 (351) 216-80-80<br>
+Факс: +7 (351) 216-82-22<br>
+E-mail: <a style="color:#ffffff; text-decoration:underline;" href="mailto:document@konar.ru">document@konar.ru</a><br>
+Веб-сайт: <a style="color:#ffffff; text-decoration:underline;" href="http://konar.ru">konar.ru</a>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-99205fc elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="99205fc" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-732aef4" data-id="732aef4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-782c43f uael-offcanvas-trigger-align-floating elementor-hidden-tablet elementor-hidden-phone elementor-widget elementor-widget-uael-offcanvas" data-id="782c43f" data-element_type="widget" data-widget_type="uael-offcanvas.default">
+				<div class="elementor-widget-container">
+			
+		<div id="782c43f-overlay" data-trigger-on="icon" data-close-on-overlay="yes" data-close-on-esc="yes" data-content="saved_rows" data-device="false" data-custom="" data-custom-id="" data-canvas-width="1200" data-wrap-menu-item="no" class="uael-offcanvas-parent-wrapper uael-module-content uaoffcanvas-782c43f">
+			<div id="offcanvas-782c43f" class="uael-offcanvas uael-custom-offcanvas   uael-offcanvas-type-normal uael-offcanvas-scroll-disable uael-offcanvas-shadow-inset position-at-right">
+				<div class="uael-offcanvas-content">
+					<div class="uael-offcanvas-action-wrap">
+										<div class="uael-offcanvas-close-icon-wrapper elementor-icon-wrapper elementor-clickable uael-offcanvas-close-icon-position-right-top">
+					<span class="uael-offcanvas-close elementor-icon-link elementor-clickable ">
+						<span class="uael-offcanvas-close-icon">
+																<i aria-hidden="true" class="fas fa-times"></i>													</span>
+					</span>
+				</div>
+									</div>
+					<div class="uael-offcanvas-text uael-offcanvas-content-data">
+								<div data-elementor-type="section" data-elementor-id="522" class="elementor elementor-522">
+					<div class="elementor-section-wrap">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-3f5c1b08 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3f5c1b08" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7bfd4523" data-id="7bfd4523" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-639c8458 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="639c8458" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-59cfb21f" data-id="59cfb21f" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-3ad58127 elementor-search-form--skin-classic elementor-search-form--button-type-icon elementor-search-form--icon-search elementor-widget elementor-widget-search-form" data-id="3ad58127" data-element_type="widget" data-settings="{" skin":"classic"}"="" data-widget_type="search-form.default">
+				<div class="elementor-widget-container">
+					<form class="elementor-search-form" role="search" action="https://bvk.konar.ru" method="get">
+									<div class="elementor-search-form__container">
+								<input placeholder="Поиск по сайту..." class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+													<button class="elementor-search-form__submit" type="submit" title="Search" aria-label="Search">
+													<i aria-hidden="true" class="fas fa-search"></i>							<span class="elementor-screen-only">Search</span>
+											</button>
+											</div>
+		</form>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-2f997f6a elementor-widget elementor-widget-text-editor" data-id="2f997f6a" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Структура Промышленной группы КОНАР</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-bf98ee0 elementor-widget elementor-widget-image" data-id="bf98ee0" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://konar.ru">
+							<img width="324" height="80" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20324%2080'%3E%3C/svg%3E" class="attachment-full size-full wp-image-1205" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320.png 324w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320-300x74.png 300w" data-lazy-sizes="(max-width: 324px) 100vw, 324px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320.png"><noscript><img width="324" height="80" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320.png" class="attachment-full size-full wp-image-1205" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320.png 324w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/logo-grey-320-300x74.png 300w" sizes="(max-width: 324px) 100vw, 324px" /></noscript>								</a>
+													</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4becabd6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4becabd6" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-206ac9a7" data-id="206ac9a7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-4a16f6f6 elementor-widget elementor-widget-image" data-id="4a16f6f6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-8c557ab elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="8c557ab" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-0e2cf34" data-id="0e2cf34" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-47b1b600" data-id="47b1b600" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5e7f8055 elementor-widget elementor-widget-image" data-id="5e7f8055" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://konar.ru/promyshlennaya-gruppa-konar/litejno-kuznechnyj-divizion/">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" title="meta-1l" alt="meta-1l" loading="lazy" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/meta-1l.png"><noscript><img src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/meta-1l.png" title="meta-1l" alt="meta-1l" loading="lazy" /></noscript>								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-5254d3b3 elementor-widget elementor-widget-text-editor" data-id="5254d3b3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><span style="text-decoration: underline;"><a href="http://konar.ru/promyshlennaya-gruppa-konar/litejno-kuznechnyj-divizion/" data-wplink-edit="true">Литейно-кузнечный дивизион</a></span></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-126711ec" data-id="126711ec" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-2d6266b7 elementor-widget elementor-widget-image" data-id="2d6266b7" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://konar.ru/promyshlennaya-gruppa-konar/mexanicheskij-divizion/">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" title="meha1n" alt="meha1n" loading="lazy" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/meha1n.png"><noscript><img src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/meha1n.png" title="meha1n" alt="meha1n" loading="lazy" /></noscript>								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-2556679f elementor-widget elementor-widget-text-editor" data-id="2556679f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><span style="text-decoration: underline;"><a href="http://konar.ru/promyshlennaya-gruppa-konar/mexanicheskij-divizion/" data-wplink-edit="true">Механический дивизион</a></span></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-128a36ff" data-id="128a36ff" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-58c8dad5 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="58c8dad5" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-b26dbb1" data-id="b26dbb1" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-c07065e" data-id="c07065e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-1626d6a2 elementor-view-default elementor-widget elementor-widget-icon" data-id="1626d6a2" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class=" icomoon-the7-font-the7-arrow-29-1"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-506f0b52 elementor-widget elementor-widget-text-editor" data-id="506f0b52" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p style="text-align: center;"><a href="https://bvk.konar.ru"><span style="text-decoration: underline;">ООО «БВК»</span></a><br><a href="http://skt.konar.ru"><span style="text-decoration: underline;">ООО «СКТ»</span></a></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-7a5e8ff7" data-id="7a5e8ff7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-c772a83 elementor-view-default elementor-widget elementor-widget-icon" data-id="c772a83" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class=" icomoon-the7-font-the7-arrow-29-1"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-4a02bf8d elementor-widget elementor-widget-text-editor" data-id="4a02bf8d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p style="text-align: center;"><a href="http://konar.konar.ru"><span style="text-decoration: underline;">АО «КОНАР»</span></a><br><a href="http://kornet.konar.ru"><span style="text-decoration: underline;">ООО «Корнет»</span></a></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-4bfe3955" data-id="4bfe3955" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-7f7e2093 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7f7e2093" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-2e5636c8" data-id="2e5636c8" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-280966d0 elementor-widget elementor-widget-image" data-id="280966d0" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-407e1340 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="407e1340" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-ecfe017" data-id="ecfe017" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-31ed3ab8" data-id="31ed3ab8" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-420160cb elementor-widget elementor-widget-image" data-id="420160cb" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://konar.ru/inzhiniring/">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" title="en1g" alt="en1g" loading="lazy" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/en1g.png"><noscript><img src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/en1g.png" title="en1g" alt="en1g" loading="lazy" /></noscript>								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-2192f11a elementor-widget elementor-widget-text-editor" data-id="2192f11a" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><a href="http://konar.ru/inzhiniring/"><u>ИНЖИНИРИНГ</u></a></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-5e18dfeb" data-id="5e18dfeb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-575487a3 elementor-widget elementor-widget-image" data-id="575487a3" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="http://stankomash.konar.ru">
+							<img width="302" height="71" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20302%2071'%3E%3C/svg%3E" class="attachment-full size-full wp-image-521" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1.png 302w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1-300x71.png 300w" data-lazy-sizes="(max-width: 302px) 100vw, 302px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1.png"><noscript><img width="302" height="71" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1.png" class="attachment-full size-full wp-image-521" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1.png 302w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/ip1-300x71.png 300w" sizes="(max-width: 302px) 100vw, 302px" /></noscript>								</a>
+													</div>
+				</div>
+				<div class="elementor-element elementor-element-6dc02397 elementor-widget elementor-widget-text-editor" data-id="6dc02397" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><span style="text-decoration: underline;"><a href="http://stankomash.konar.ru">ИНДУСТРИАЛЬНЫЙ ПАРК</a></span><br><span style="text-decoration: underline;"><a href="http://stankomash.konar.ru">«СТАНКОМАШ»</a></span></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-10ec9fe7" data-id="10ec9fe7" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4c588f45 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4c588f45" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-74769a0a" data-id="74769a0a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-df7c08a elementor-widget elementor-widget-image" data-id="df7c08a" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img width="1300" height="15" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201300%2015'%3E%3C/svg%3E" class="attachment-full size-full wp-image-515" alt="" data-lazy-srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" data-lazy-sizes="(max-width: 1300px) 100vw, 1300px" data-lazy-src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png"><noscript><img width="1300" height="15" src="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png" class="attachment-full size-full wp-image-515" alt="" srcset="https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1.png 1300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-300x3.png 300w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-1024x12.png 1024w, https://bvk.konar.ru/wp-content/uploads/sites/2/2021/08/div-1-768x9.png 768w" sizes="(max-width: 1300px) 100vw, 1300px" /></noscript>													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+							</div>
+				</div>
+							</div>
+				</div>
+			</div>
+			<div class="uael-offcanvas-overlay elementor-clickable"></div>
+		</div>
+			<div class="uael-offcanvas-action-wrap">
+							<div class="uael-offcanvas-action elementor-clickable uael-offcanvas-trigger uael-offcanvas-icon-wrap" data-offcanvas="782c43f"><span class="uael-offcanvas-icon-bg uael-offcanvas-icon  uael-offcanvas-action-alignment-right"><i aria-hidden="true" class="fas fa-list"></i></span></div>
+						</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-9708d16 elementor-widget elementor-widget-html" data-id="9708d16" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(84785827, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/84785827" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+							</div>
+				</div>
+		</section>					</div><!-- .wf-container -->
+				</div><!-- .wf-container-footer -->
+			</div><!-- .wf-wrap -->
+
+			
+	</footer><!-- #footer -->
+
+
+	<a href="#" class="scroll-top"><span class="screen-reader-text">Вверх</span></a>
+
+</div><!-- #page -->
+
+
+
+
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/main.min.js" id="dt-main-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/wp-polyfill-inert.min.js" id="wp-polyfill-inert-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/regenerator-runtime.min.js" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/wp-polyfill.min.js" id="wp-polyfill-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/hooks.min.js" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/i18n.min.js" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="wp-i18n-js-after">
+/* <![CDATA[ */
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/index.js" id="swv-js" defer=""></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/bvk.konar.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/index_1.js" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+/* <![CDATA[ */
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/bvk.konar.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+/* <![CDATA[ */
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/legacy.min.js" id="dt-legacy-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/post-type.min.js" id="the7-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/imagesloaded.min.js" id="imagesloaded-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/uael-offcanvas.min.js" id="uael-offcanvas-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/webpack-pro.runtime.min.js" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/webpack.runtime.min.js" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/frontend-modules.min.js" id="elementor-frontend-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="elementor-pro-frontend-js-before">
+/* <![CDATA[ */
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/bvk.konar.ru\/wp-admin\/admin-ajax.php","nonce":"6b4898fb94","urls":{"assets":"https:\/\/bvk.konar.ru\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/bvk.konar.ru\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"ru_RU","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/bvk.konar.ru\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/frontend.min.js" id="elementor-pro-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/waypoints.min.js" id="elementor-waypoints-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/core.min.js" id="jquery-ui-core-js" defer=""></script>
+<script type="text/javascript" id="elementor-frontend-js-extra">
+/* <![CDATA[ */
+var uael_particles_script = {"uael_particles_url":"https:\/\/bvk.konar.ru\/wp-content\/plugins\/ultimate-elementor\/assets\/min-js\/uael-particles.min.js","particles_url":"https:\/\/bvk.konar.ru\/wp-content\/plugins\/ultimate-elementor\/assets\/lib\/particles\/particles.min.js"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="elementor-frontend-js-before">
+/* <![CDATA[ */
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Facebook","shareOnTwitter":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Twitter","pinIt":"\u0417\u0430\u043f\u0438\u043d\u0438\u0442\u044c","download":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c","downloadImage":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","fullscreen":"\u0412\u043e \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","zoom":"\u0423\u0432\u0435\u043b\u0438\u0447\u0435\u043d\u0438\u0435","share":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f","playVideo":"\u041f\u0440\u043e\u0438\u0433\u0440\u0430\u0442\u044c \u0432\u0438\u0434\u0435\u043e","previous":"\u041d\u0430\u0437\u0430\u0434","next":"\u0414\u0430\u043b\u0435\u0435","close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","a11yCarouselWrapperAriaLabel":"\u041a\u0430\u0440\u0443\u0441\u0435\u043b\u044c | \u0413\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043f\u0440\u043e\u043a\u0440\u0443\u0442\u043a\u0430: \u0441\u0442\u0440\u0435\u043b\u043a\u0430 \u0432\u043b\u0435\u0432\u043e \u0438 \u0432\u043f\u0440\u0430\u0432\u043e","a11yCarouselPrevSlideMessage":"\u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439 \u0441\u043b\u0430\u0439\u0434","a11yCarouselNextSlideMessage":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u0441\u043b\u0430\u0439\u0434","a11yCarouselFirstSlideMessage":"\u042d\u0442\u043e \u043f\u0435\u0440\u0432\u044b\u0439 \u0441\u043b\u0430\u0439\u0434","a11yCarouselLastSlideMessage":"\u042d\u0442\u043e \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0439 \u0441\u043b\u0430\u0439\u0434","a11yCarouselPaginationBulletMessage":"\u041f\u0435\u0440\u0435\u0439\u0442\u0438 \u043a \u0441\u043b\u0430\u0439\u0434\u0443"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"\u041c\u043e\u0431\u0438\u043b\u044c\u043d\u044b\u0439 - \u043a\u043d\u0438\u0436\u043d\u0430\u044f \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"\u041c\u043e\u0431\u0438\u043b\u044c\u043d\u044b\u0439 - \u0430\u043b\u044c\u0431\u043e\u043c\u043d\u0430\u044f \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442 - \u043a\u043d\u0438\u0436\u043d\u0430\u044f \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442 - \u0430\u043b\u044c\u0431\u043e\u043c\u043d\u0430\u044f \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u044f","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"\u041d\u043e\u0443\u0442\u0431\u0443\u043a","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"\u0428\u0438\u0440\u043e\u043a\u043e\u0444\u043e\u0440\u043c\u0430\u0442\u043d\u044b\u0435","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.22.3","is_static":false,"experimentalFeatures":{"e_optimized_assets_loading":true,"additional_custom_breakpoints":true,"container_grid":true,"e_swiper_latest":true,"e_onboarding":true,"theme_builder_v2":true,"home_screen":true,"ai-layout":true,"landing-pages":true,"page-transitions":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/bvk.konar.ru\/wp-content\/plugins\/elementor\/assets\/"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":565,"title":"%D0%9E%D0%9E%D0%9E%20%C2%AB%D0%91%D0%92%D0%9A%C2%BB%20%E2%80%94%20%D0%9E%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%81%D0%B0%D0%B9%D1%82%20%D0%9E%D0%9E%D0%9E%20%C2%AB%D0%91%D0%92%D0%9A%C2%BB%2C%20%D0%B3.%20%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA","excerpt":"","featuredImage":false}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/frontend.min_1.js" id="elementor-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="elementor-frontend-js-after">window.addEventListener('DOMContentLoaded', function() {
+/* <![CDATA[ */
+window.scope_array = [];
+								window.backend = 0;
+								jQuery.cachedScript = function( url, options ) {
+									// Allow user to set any option except for dataType, cache, and url.
+									options = jQuery.extend( options || {}, {
+										dataType: "script",
+										cache: true,
+										url: url
+									});
+									// Return the jqXHR object so we can chain callbacks.
+									return jQuery.ajax( options );
+								};
+							    jQuery( window ).on( "elementor/frontend/init", function() {
+									elementorFrontend.hooks.addAction( "frontend/element_ready/global", function( $scope, $ ){
+										if ( "undefined" == typeof $scope ) {
+												return;
+										}
+										if ( $scope.hasClass( "uael-particle-yes" ) ) {
+											window.scope_array.push( $scope );
+											$scope.find(".uael-particle-wrapper").addClass("js-is-enabled");
+										}else{
+											return;
+										}
+										if(elementorFrontend.isEditMode() && $scope.find(".uael-particle-wrapper").hasClass("js-is-enabled") && window.backend == 0 ){		
+											var uael_url = uael_particles_script.uael_particles_url;
+											
+											jQuery.cachedScript( uael_url );
+											window.backend = 1;
+										}else if(elementorFrontend.isEditMode()){
+											var uael_url = uael_particles_script.uael_particles_url;
+											jQuery.cachedScript( uael_url ).done(function(){
+												var flag = true;
+											});
+										}
+									});
+								});
+								 jQuery( document ).on( "ready elementor/popup/show", () => {
+									if ( jQuery.find( ".uael-particle-yes" ).length < 1 ) {
+										return;
+									}
+									var uael_url = uael_particles_script.uael_particles_url;
+									jQuery.cachedScript = function( url, options ) {
+										// Allow user to set any option except for dataType, cache, and url.
+										options = jQuery.extend( options || {}, {
+											dataType: "script",
+											cache: true,
+											url: url
+										});
+										// Return the jqXHR object so we can chain callbacks.
+										return jQuery.ajax( options );
+									};
+									jQuery.cachedScript( uael_url );
+								});	
+/* ]]> */
+});</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="js/elements-handlers.min.js" id="pro-elements-handlers-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="js/pp-bg-effects.js" id="pp-bg-effects-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="js/lazyload.min.js"></script>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="pswp__bg"></div>
+	<div class="pswp__scroll-wrap">
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+		<div class="pswp__ui pswp__ui--hidden">
+			<div class="pswp__top-bar">
+				<div class="pswp__counter"></div>
+				<button class="pswp__button pswp__button--close" title="Close (Esc)" aria-label="Close (Esc)"></button>
+				<button class="pswp__button pswp__button--share" title="Share" aria-label="Share"></button>
+				<button class="pswp__button pswp__button--fs" title="Toggle fullscreen" aria-label="Toggle fullscreen"></button>
+				<button class="pswp__button pswp__button--zoom" title="Zoom in/out" aria-label="Zoom in/out"></button>
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div> 
+			</div>
+			<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)" aria-label="Previous (arrow left)">
+			</button>
+			<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)" aria-label="Next (arrow right)">
+			</button>
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="rocketlazyloadscript" language="javascript">window.addEventListener('DOMContentLoaded', function() {
+jQuery(‘.agree’).click();
+});</script>
+
+
+
+</body></html><!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1770018176 -->
